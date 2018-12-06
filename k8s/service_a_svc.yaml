@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: servicea
+spec:
+  clusterIP: None
+  ports:
+  - name: envoy-web
+    port: 8786
+    targetPort: 8786
+  selector:
+    app: servicea

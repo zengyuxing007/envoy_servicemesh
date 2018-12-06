@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: serviceb
+spec:
+  ports:
+  - name: envoy-web
+    port: 15001
+    targetPort: 15001
+  selector:
+    app: serviceb
