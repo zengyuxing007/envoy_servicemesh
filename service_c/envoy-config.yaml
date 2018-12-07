@@ -47,5 +47,5 @@ static_resources:
         hosts:
           -
             socket_address:
-              address: "service_c"
+              address: "servicec.sm.svc.cluster.ci"
               port_value: 8083

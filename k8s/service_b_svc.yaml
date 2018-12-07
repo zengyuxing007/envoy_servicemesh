@@ -3,6 +3,7 @@ apiVersion: v1
 metadata:
   name: serviceb
 spec:
+  clusterIP: None
   ports:
   - name: envoy-web
     port: 15001
