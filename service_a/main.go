@@ -6,23 +6,14 @@ import (
 	"log"
 
 	"net/http"
-    "os"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Fprintf(w, "Calling Service B")
 
-    servicebHost := os.Getenv("SERVICEB_SERVICE_HOST")
-    servicebPort := os.Getenv("SERVICEB_SERVICE_PORT")
-
-
-    servicecHost := os.Getenv("SERVICEC_SERVICE_HOST")
-    servicecPort := os.Getenv("SERVICEC_SERVICE_PORT")
-
-    fmt.Printf("servicebHost:",servicebHost,"servicebPort:",servicebPort);
-
-	req, err := http.NewRequest("GET", "http://"+servicebHost+":"+servicebPort+"/", nil)
+	//req, err := http.NewRequest("GET", "http://service_a_envoy:8788/", nil)
+	req, err := http.NewRequest("GET", "http://serviceb:8082/", nil)
 	if err != nil {
 		fmt.Printf("%s", err)
 	}
@@ -50,7 +41,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, string(body))
 	fmt.Fprintf(w, "Hello from service A")
 
-	req, err := http.NewRequest("GET", "http://"+servicecHost+":"+servicecPort+"/", nil)
+	//req, err = http.NewRequest("GET", "http://service_a_envoy:8791/", nil)
+	req, err = http.NewRequest("GET", "http://servicec:8083/", nil)
 	if err != nil {
 		fmt.Printf("%s", err)
 	}
