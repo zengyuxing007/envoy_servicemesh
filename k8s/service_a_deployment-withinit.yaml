@@ -1,9 +1,9 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: servicea
+  name: servicea-1
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -12,8 +12,34 @@ spec:
         stage: prod
         version: v1
     spec:
-      restartPolicy: "Always"
-      containers:
+     initContainers:
+      - args:
+        - -p
+        - "80"
+        - -u
+        - "999"
+        - -m
+        - REDIRECT
+        - -i
+        - '*'
+        - -x
+        - ""
+        - -b
+        - 8081,
+        - -d
+        - ""
+        image: jimmysong/istio-release-proxy_init:1.0.0
+        imagePullPolicy: IfNotPresent
+        name: sm-init 
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+     restartPolicy: "Always"
+     containers:
       - name: servicea
         image: vifoggy/servicea:lastest
         imagePullPolicy: Always
@@ -23,8 +49,11 @@ spec:
           protocol: TCP
 
       - name: envoy
-        image: turbinelabs/envoy-simple:0.19.0
+        image: vifoggy/envoy-simple:latest
         imagePullPolicy: Always
+        securityContext:
+          privileged: false
+          runAsUser: 999
         ports:
           - containerPort: 80
           - containerPort: 9999

@@ -6,7 +6,7 @@ spec:
   clusterIP: None
   ports:
   - name: envoy-web
-    port: 15001
-    targetPort: 15001
+    port: 80
+    targetPort: 80
   selector:
     app: serviceb
