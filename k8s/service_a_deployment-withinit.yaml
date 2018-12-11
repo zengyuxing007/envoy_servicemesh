@@ -15,7 +15,7 @@ spec:
      initContainers:
       - args:
         - -p
-        - "80"
+        - "15001"
         - -u
         - "999"
         - -m
@@ -52,10 +52,10 @@ spec:
         image: vifoggy/envoy-simple:latest
         imagePullPolicy: Always
         securityContext:
-          privileged: false
+          privileged: true
           runAsUser: 999
         ports:
-          - containerPort: 80
+          - containerPort: 15001
           - containerPort: 9999
         env:
         - name: ENVOY_XDS_HOST
