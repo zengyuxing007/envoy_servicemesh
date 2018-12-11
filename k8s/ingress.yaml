@@ -1,0 +1,24 @@
+---
+  kind: "Ingress"
+  apiVersion: "extensions/v1beta1"
+  metadata: 
+    name: "envoy-servicemesh-ingress"
+    namespace: "default"
+    labels: 
+      envoy-servicemesh: "true"
+    annotations: 
+      nginx.ingress.kubernetes.io/load-balance: "round_robin"
+      nginx.ingress.kubernetes.io/rewrite-target: "/"
+  spec: 
+    rules: 
+      - 
+        host: "envoy-servicemesh-test.skiff.cn"
+        http: 
+          paths: 
+            - 
+              path: "/"
+              backend: 
+                serviceName: "servicea"
+                servicePort: 8081
+  status: 
+    loadBalancer: {}

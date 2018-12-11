@@ -1,0 +1,24 @@
+---
+  kind: "Ingress"
+  apiVersion: "extensions/v1beta1"
+  metadata: 
+    name: "envoy-servicemesh-ingress-b"
+    namespace: "default"
+    labels: 
+      envoy-servicemesh: "true"
+    annotations: 
+      nginx.ingress.kubernetes.io/load-balance: "round_robin"
+      nginx.ingress.kubernetes.io/rewrite-target: "/"
+  spec: 
+    rules: 
+      - 
+        host: "sb-envoy-servicemesh-test.skiff.cn"
+        http: 
+          paths: 
+            - 
+              path: "/"
+              backend: 
+                serviceName: "serviceb"
+                servicePort: 8082
+  status: 
+    loadBalancer: {}

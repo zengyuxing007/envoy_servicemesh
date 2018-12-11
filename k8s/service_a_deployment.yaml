@@ -30,7 +30,7 @@ spec:
           - containerPort: 9999
         env:
         - name: ENVOY_XDS_HOST
-          value: "rotor.default.svc.cluster.local" # Change if using a different namespace
+          value: "rotor.default.svc.cluster.ci" # Change if using a different namespace
         - name: ENVOY_XDS_PORT
           value: "50000"
         - name: ENVOY_NODE_ZONE
