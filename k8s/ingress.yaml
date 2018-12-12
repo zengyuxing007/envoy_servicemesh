@@ -12,7 +12,7 @@
   spec: 
     rules: 
       - 
-        host: "envoy-servicemesh-test.skiff.cn"
+        host: "servicea"
         http: 
           paths: 
             - 
