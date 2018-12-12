@@ -12,7 +12,7 @@ FROM phusion/baseimage:0.10.2
 
 
 COPY --from=golang /go/bin/main /usr/local/bin/
-RUN apt update && apt install -y tcpflow curl net-tools
+RUN apt update && apt install -y tcpflow curl net-tools iptables
 RUN chmod +x /usr/local/bin/main
 
 CMD ["/sbin/my_init","--","/usr/local/bin/main"]
